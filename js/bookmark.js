@@ -5,8 +5,6 @@ $(document).ready(function() {
     dumpBookmarks();
 });
 
-
-
 // Copyright (c) 2012 The Chromium Authors. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
@@ -22,7 +20,10 @@ $(function() {
 function dumpBookmarks(query) {
     var bookmarkTreeNodes = chrome.bookmarks.getTree(
         function(bookmarkTreeNodes) {
-            $('#bookmarks').append(dumpTreeNodes(bookmarkTreeNodes, query));
+            bookmarkTreeNodes[0].title = "Folders";
+            $('#bookmarkTree').treeview({
+                data: bookmarkTreeNodes
+            });
         });
 }
 function dumpTreeNodes(bookmarkNodes, query) {
@@ -131,7 +132,3 @@ function dumpNode(bookmarkNode, query) {
     }
     return li;
 }
-
-//document.addEventListener('DOMContentLoaded', function () {
-//    dumpBookmarks();
-//});
